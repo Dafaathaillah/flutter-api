@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login(Request $request){
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -27,7 +28,7 @@ class AuthController extends Controller
         return $user->createToken($request->device_name)->plainTextToken;
     }
 
-    public function logout(){
+    public function logout(Request $request){
         $user = User::where('email', $request->email)->first();
 
         if ($user) {

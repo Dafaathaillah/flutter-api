@@ -14,7 +14,7 @@ class AddUserIdToTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->foreignId('uer_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
         });
     }
 
